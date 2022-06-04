@@ -1,33 +1,25 @@
-Choose ONE of the following tasks.
-Please do not invest more than 2-4 hours on this.
-Upload your results to a Github Gist, for easier sharing and reviewing.
+# My opinion:
 
-Thank you and good luck!
+The code is great, I could barely point at something/logic that is wrong. While it is a well written code, using the repository pattern
+I feel has a way of over complicating codes that should be simple. Eloquent on its own is a repository, so,
+coming up with another repository on top of Eloquent is like adding another layer of code/pattern on a predefined layer.
 
+If this was not done using the repository pattern, it will be service and events driven. 
 
+The logics and code formatting are easy and simple to read, I had little/no issues reading through the code line by line
+except some functions that I suppose are in a model somewhere that I don't know what they do specifically.
 
-Code to refactor
-=================
-1) app/Http/Controllers/BookingController.php
-2) app/Repository/BookingRepository.php
+## I made slight changes, which are:
 
-Code to write tests
-=====================
-3) App/Helpers/TeHelper.php method willExpireAt
-4) App/Repository/UserRepository.php, method createOrUpdate
+In my own opinion whenever we are eager loading, for the sake of efficiency, we should always select the fields
+we want e.g with('author:id,first_name,last_name'), this is faster and more efficient than getting all the
+user data from the DB.
 
+In the BookingController, some things are hard coded, I think it should be avoided since we can access it directly from the collection.
+It is possible that there is typographical issue in the hard coded string which can break the application or create unnecessary bug(s).
 
-----------------------------
+While these operator will work well "!= and/or ==" I feel it is appropriate and safer to make it strict using "=== or !==".
 
-What I expect in your repo.
+Since we are getting/fetching user history, I feel it is efficient to use the Auth::user() facade, instead of searching using user_id.
 
-1, A readme with:   Your thoughts about the code. What makes it amazing code. Or what makes it ok code. Or what makes it terrible code. How would you have done it. Thoughts on formatting. Logic.. 
-
-2.  Refactor it if you feel it needs refactoring. The more love you put into it. The easier for us to asses.  
-
-Make two commits. First commit with original code. Second with your refactor so we can easily trace changes. 
-
-NB: you do not need to set up the code on local and make the web app run. It will not run as its not a complete web app. This is purely to assess you thoughts about code, formatting, logic etc
-
-
-
+## These are just my opinion, I am still a junior developer so I am looking at it from my own perspective. Thank you.

@@ -35,15 +35,14 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        if($user_id = $request->get('user_id')) {
-
-            $response = $this->repository->getUsersJobs($user_id);
-
-        }
-        elseif($request->__authenticatedUser->user_type == env('ADMIN_ROLE_ID') || $request->__authenticatedUser->user_type == env('SUPERADMIN_ROLE_ID'))
+        
+=        if($request->__authenticatedUser->user_type == env('ADMIN_ROLE_ID') || $request->__authenticatedUser->user_type == env('SUPERADMIN_ROLE_ID'))
         {
             $response = $this->repository->getAll($request);
         }
+
+        // we are getting the auth facade from the repository
+        $response = $this->repository->getUsersJobs();
 
         return response($response);
     }
@@ -55,6 +54,9 @@ class BookingController extends Controller
     public function show($id)
     {
         $job = $this->repository->with('translatorJobRel.user')->find($id);
+
+        if(!$job)
+            return response()->json(['error' => 'Job not found'], 404);
 
         return response($job);
     }
